@@ -16,26 +16,64 @@ namespace SweepStakes
         //- Contestant PickWinner()
         //- void PrintContestantInfo(Contestant contestant)
 
-        public void SweepStakes(string name)
-        {
+        //member variables
+        public Dictionary<double, Contestant> contestants;
 
+        public string name;
+        //constructor
+        public SweepStakesClass(string name)
+        {
+            contestants = new Dictionary<double, Contestant>();
+            this.name = name;
         }
+
+        //member methods
 
         public void RegisterContestant(Contestant contestant)
         {
-
+            contestants.Add(contestant.registrationNumber, contestant);
         }
 
-        public Contestant PickWinner()
+        public Contestant PickWinner() 
         {
-            Contestant contestantPlaceHolder = new Contestant();
-            return contestantPlaceHolder;
+            Random rand = new Random();
+            foreach (KeyValuePair<double, Contestant> person in contestants)
+            {
+                double winNumber = rand.Next(1, 1000);
+                while (person.Key != winNumber)
+                {
+                    if (person.Key == winNumber)
+                    {
+                        return person.Value;
+                    }
+                    else
+                    {
+                        winNumber = rand.Next(1, 1000);
+                    }
+                }
+            }
+            return null;
         }
-
-        public void PrintContestantInfo()
+        public void PrintContestantInfo(Contestant contestant)
         {
-
+            Console.WriteLine("{0} {1} \n" + "{2}", contestant.firstName, contestant.lastName, contestant.email);
+        }
+        public void CongratulateWinner() 
+        {
+            foreach (KeyValuePair<Double, Contestant> players in contestants)
+            {
+                if (players.Key != PickWinner().registrationNumber)
+                {
+                    Console.WriteLine("The Winner is: " + PickWinner().firstName + " " + PickWinner().lastName);
+                }
+                else
+                {
+                    Console.WriteLine("Congratulations " + PickWinner().firstName + PickWinner().lastName + " You win! \n" +
+                        "An email has been sent to: " + PickWinner().email + "\n" +
+                        "Please contact our offices as soon as you recieve your confirmation email, thank you!");
+                }
+            }
         }
 
-     }
+    }
 }
