@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SweepStakes
 {
-    class SweepStakesClass
+    public class SweepStakesClass
     {
         // uses the Dictionary data structure
         //as an underlying structure.The Sweepstakes class will have the following methods with full
@@ -68,12 +68,9 @@ namespace SweepStakes
                 }
                 else
                 {
-                    Console.WriteLine("Congratulations " + PickWinner().firstName + PickWinner().lastName + " You win! \n" +
-                        "An email has been sent to: " + PickWinner().email + "\n" +
-                        "Please contact our offices as soon as you recieve your confirmation email, thank you!");
+                    Console.WriteLine("Congratulations " + PickWinner().firstName + PickWinner().lastName + " You win! \n" + "We have sent an email to: " + PickWinner().email + "\n Please contact us to claim your winnings");
                 }
             }
         }
-
     }
 }

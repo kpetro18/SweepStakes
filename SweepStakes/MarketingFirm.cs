@@ -6,9 +6,23 @@ using System.Threading.Tasks;
 
 namespace SweepStakes
 {
-    class MarketingFirm
+    public class MarketingFirm
     {
-        //functionality to create SweepStakes
-        //implement a dpendency injection so that i can utilize sweepstakes manager
+        private ISweepstakesManager _manager;
+        public ISweepstakesManager Manager { get => _manager; set => _manager = value; }
+
+        // MarketingFirm uses Dependency Injection because you can use either Stack or Queue due to both Manager classes inheritting from ISweepStakesManager
+
+        public MarketingFirm(ISweepstakesManager _manager)
+        {
+            this._manager = _manager;
+        }
+
+        public void CreateSweepstakes()
+        {
+            Console.WriteLine("Please enter the name of your Sweepstakes: ");
+            string userInput = Console.ReadLine();
+            SweepStakesClass sweepstakes = new SweepStakesClass(userInput);
+        }
     }
 }
